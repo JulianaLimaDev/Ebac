@@ -3,16 +3,18 @@
 #include <locale.h> //biblioteca de alocação de texto por região
 #include <string.h> //biblioteca responsável por cuidar das string
 
-int registro()
+int registro()//Função responável por cadastrar usuários no sistema
 {
+	//inicio da criação de váriaveis/ string
 	char arquivo[40];
 	char cpf[40];
 	char nome[40];
 	char sobrenome[40];
 	char cargo[40];
+	//final da criação de váriaveis/ string
 	
-	printf("Digite o CPF a ser cadastrado: ");
-	scanf("%s", cpf);
+	printf("Digite o CPF a ser cadastrado: ");//coletando informações do usuário
+	scanf("%s", cpf); //refere-se a string
 	
 	strcpy(arquivo, cpf); //responsavel por copiar os valores das string
 	
@@ -86,10 +88,26 @@ int consulta()
     system("pause");
 }
 
+
+
 int deletar()
 {
-	printf("Você escolheu deletar nomes!\n");
-	system("pause");	
+	char cpf[40];
+	
+	printf("Digite o CPF do usuario a ser deletado!\n");
+	scanf("%s", cpf);
+	
+	remove(cpf);
+	
+	FILE *file;
+	file = fopen(cpf, "r");
+	
+	if(file ==NULL)
+	{
+		printf("O usuario não se encontra no sistema!\n");
+		system("pause");
+	}
+	
 }
 
 int main()
@@ -97,35 +115,35 @@ int main()
 	int opcao=0; //Definindo variáveiss
 	int laco=1;
 	char senhadigitada[10] = "a";
+	int comparacao;
 	
+	printf("### Cartorio da Ebac ###\n\n");
+	printf("Login de administrador!\n\nDigite a sua senha: ");
+	scanf("%s", senhadigitada);
 	
+	comparacao = strcmp(senhadigitada, "admin");
 	
-	for(laco=1;laco=1;)
+	if (comparacao ==0)
 	{
-
 		system("cls");
-
+		for(laco=1;laco=1;)
+		{
+	
 		setlocale(LC_ALL, "Portuguese"); //Definindo a linguagem
 			
 		printf("### Cartório da EBAC ###\n\n"); //inicio do menu
-		printf("Login de administrador!\n\nDigite a sua senha:");
-		scanf("%s", senhadigitada);
-		
-		if(senhadigitada[10] == "admin")
-		{
-						
-    		printf("Escolha a opção desejada do menu\n\n");
-    		printf("\t1 - Registrar nomes\n");
-    		printf("\t2 - Consultar nomes\n");
-    		printf("\t3 - Deletar nomes\n\n"); 
-    		printf("\t4 - Sair do sistema!\n\n");
-    		printf("Opção: ");//fim do menu
+		printf("Escolha a opção desejada do menu\n\n");
+		printf("\t1 - Registrar nomes\n");
+    	printf("\t2 - Consultar nomes\n");
+    	printf("\t3 - Deletar nomes\n\n"); 
+   		printf("\t4 - Sair do sistema!\n\n");
+   		printf("Opção: "); //fim do menu
 				
-    		scanf("%d", &opcao); //armazenando a escolha do usuário
+		scanf("%d", &opcao); //armazenando a escolha do usuario
 		
-      		system("cls");
-	
-    		switch(opcao) //inicio da seleção
+		system("cls"); //responsável por limpar a tela
+		
+    		switch(opcao) //inicio da seleção do menu
     		{
     			case 1:
     			registro();
@@ -150,8 +168,9 @@ int main()
     			break;
     		} //fim da seleção
        }
-	
-		else
+    }
+
+	else
         printf("Senha incorreta!"); 
-	}
+	
 }
